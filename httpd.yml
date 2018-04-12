@@ -1,0 +1,38 @@
+---
+- hosts: app
+  become: true
+  tasks:
+    - name: update all packages
+      yum: name=* state=latest
+
+    - name: Install Apache and php
+      yum:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - php
+        - httpd
+
+    - name: Start Apache
+      service:
+        name: httpd
+        state: running
+        enabled: yes
+
+    - name: Remove default page
+      file:
+        path: /etc/httpd/conf.d/welcome.conf
+        state: absent
+
+    - name: Install Hello World PHP script
+      copy:
+        src: files/index.php.j2
+        dest: /var/www/html/index.php
+        mode: "0664"
+      notify: Restart httpd service
+
+  handlers:
+    - name: Restart httpd service
+      service:
+        name: httpd
+        state: restarted

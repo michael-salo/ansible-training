@@ -1,0 +1,16 @@
+# Application servers
+[app]
+app.example.com ansible_host=192.168.60.4
+
+# Database server
+[db]
+db.example.com ansible_host=192.168.60.6
+
+# Group 'multi' with all servers
+[multi:children]
+app
+db
+
+# Variables that will be applied to all servers
+[multi:vars]
+ansible_user=vagrant

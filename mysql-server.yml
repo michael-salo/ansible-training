@@ -1,0 +1,56 @@
+---
+- name: Install MySQL for production ready server
+  hosts: db
+  become: True
+  vars:
+    mysql_root_password: heiF3ieRi1uxie9f
+
+  tasks:
+   # - name: Update all Packages
+   #   yum: name=* state=latest
+
+   - name: Install MySQL
+     yum: name='{{ item }}' state=installed
+     with_items:
+        - mariadb-server
+        - mysql
+        - MySQL-python
+
+   - name: Start the MySQL service
+     service:
+      name: mariadb
+      state: started
+      enabled: yes
+
+   - name: update mysql root password for all root accounts
+     mysql_user:
+        name: root
+        host: '{{ item }}'
+        password: '{{ mysql_root_password }}'
+        priv: "*.*:ALL,GRANT"
+     with_items:
+        - "{{ ansible_hostname }}"
+        - 127.0.0.1
+        - ::1
+        - localhost
+
+   - name: copy .my.cnf file with root password credentials
+     template:
+        src: "templates/.my.cnf"
+        dest: "/root/.my.cnf"
+        owner: root
+        group: root
+        mode: 0600
+
+   - name: delete anonymous MySQL server user
+     action: mysql_user user="" host="{{ ansible_hostname }}" state="absent"
+
+   - name: delete anonymous MySQL server user for localhost
+     action: mysql_user user="" state="absent"
+
+   - name: remove the MySQL test database
+     action: mysql_db db=test state=absent
+
+  handlers:
+   - name: Restart mysql-service
+     service: name=mariadb state=restarted
