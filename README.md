@@ -4,7 +4,7 @@ Ansible Introduction Training
 [Install Ansible](http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 # git clone
-```git clone git@github.com:michael-salo/ansible-training.git```
+```git clone https://github.com/michael-salo/ansible-training.git```
 
 ### VirtualBox
 
