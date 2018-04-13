@@ -19,10 +19,14 @@ Follow the instructions here: [Vagrant installation](https://www.vagrantup.com/d
 ```vagrant up```
 
 ### Vagrant destroy
-```vagrant destroy```
+```vagrant destroy -f```
 
-### SSH-AGENT: how to start and add a key
+### SSH-AGENT: How to start and add vagrant identity key in order to ssh-into VMs. 
 ```
 eval "$(ssh-agent -s)"
 ssh-add ~/.vagrant.d/insecure_private_key
 ```
+
+### Test Ansible: 
+
+```ansible -m ping all```
