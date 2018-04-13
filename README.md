@@ -20,3 +20,9 @@ Follow the instructions here: [Vagrant installation](https://www.vagrantup.com/d
 
 ### Vagrant destroy
 ```vagrant destroy```
+
+### SSH-AGENT: how to start and add a key
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.vagrant.d/insecure_private_key
+```
