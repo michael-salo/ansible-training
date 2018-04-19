@@ -1,7 +1,7 @@
 # ansible-training
 
 Ansible Introduction Training
-# PART I.
+## PART I.
 [Install Ansible](http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 ## git clone
