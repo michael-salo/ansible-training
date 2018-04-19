@@ -1,0 +1,12 @@
+---
+- name: Configure web servers
+  hosts: app
+  gather_facts: True
+  roles:
+    - { role: nginx, tags: ['nginx', 'web'] }
+
+- name: Configure web servers
+  hosts: db
+  gather_facts: True
+  roles:
+    - { role: geerlingguy.mysql, tags: "mysql" }
