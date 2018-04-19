@@ -4,10 +4,10 @@
 ENV["LC_ALL"] = "en_US.UTF-8"
 
     Vagrant.configure(2) do |config|
-        config.ssh.insert_key = false
+       config.ssh.insert_key = false
        config.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", "512"]
-            vb.gui = true
+            vb.gui = false
         end
 
         # Application server 1.
