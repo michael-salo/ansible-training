@@ -1,0 +1,20 @@
+---
+- name: install nginx
+  apt: name=nginx update_cache=yes
+  notify: restart nginx
+
+- name: copy nginx config file
+  copy: src=nginx.conf dest=/etc/nginx/sites-available/default
+  notify: reload nginx
+
+- name: enable configuration
+  file: >
+    dest=/etc/nginx/sites-enabled/default
+    src=/etc/nginx/sites-available/default
+    state=link
+
+- name: copy index.html
+  template: >
+    src=index.html.j2
+    dest=/usr/share/nginx/html/index.html
+    mode=0644
