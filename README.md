@@ -47,7 +47,7 @@ function create_role() {
 }
 ```
 ### How to create role structure via ansible-galaxy command:
-```ansible-galaxy inti roles/<role_name>```
+```ansible-galaxy init roles/<role_name>```
 ## TODO(Part 2): 
 1. Extend nginx role to be listened on IP of DB host, but no static variable, use dynamic one from facts.
 2. Create mysql role for installing and configuring MYSQL on Ubuntu box.
