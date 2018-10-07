@@ -56,3 +56,4 @@ function create_role() {
 2. Create mysql role for installing and configuring MYSQL on Ubuntu box.
 3. Create a new php-fpm role or convert an existing playbook that you've already written into role.
 4. Create a new role to configure sshd service via template on CentOS and Ubuntu.
+----
